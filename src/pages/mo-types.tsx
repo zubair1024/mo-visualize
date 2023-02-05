@@ -71,12 +71,16 @@ const MoTypesScreen = () => {
       );
       const filteredToNodeIds = filteredEdges.map((i) => i.to);
       const filteredNodeIds = [selectedNode[0].id, ...filteredToNodeIds];
-      const filteredNodes = newNodes.filter(
-        (i) => filteredNodeIds.indexOf(i.id) > -1,
-      );
+      const filteredNodes = newNodes.map((i) => {
+        if (filteredNodeIds.indexOf(i.id) > -1) {
+          return { ...i, color: 'red' };
+        } else {
+          return i;
+        }
+      });
 
       setNodes(filteredNodes);
-      setEdges(filteredEdges);
+      // setEdges(filteredEdges);
     }
   };
 
